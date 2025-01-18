@@ -1,0 +1,26 @@
+version: '3.6'
+
+services:
+  ignite_node_1:
+    container_name: node_1
+    image: apacheignite/ignite:latest
+    environment:
+      IGNITE_WORK_DIR: /storage
+      CONFIG_URI: /config.xml
+      JAVA_OPTS: -Xmx500M -Djava.net.preferIPv4Stack=true
+    volumes:
+      - /home/swavek/dev/data/ignite/node1:/storage
+      - /home/swavek/workspace/ignite_workshop/server_node/node-config1.xml:/config.xml
+    ports:
+      - "10800:10800"
+
+  ignite_node_2:
+    container_name: node_2
+    image: apacheignite/ignite:latest
+    environment:
+      IGNITE_WORK_DIR: /storage
+      CONFIG_URI: /config.xml
+      JAVA_OPTS: -Xmx500M -Djava.net.preferIPv4Stack=true
+    volumes:
+      - /home/swavek/dev/data/ignite/node2:/storage
+      - /home/swavek/workspace/ignite_workshop/server_node/node-config2.xml:/config.xml
