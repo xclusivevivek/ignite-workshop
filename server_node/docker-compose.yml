@@ -7,7 +7,8 @@ services:
     environment:
       IGNITE_WORK_DIR: /storage
       CONFIG_URI: /config.xml
-      JAVA_OPTS: -Xmx500M -Djava.net.preferIPv4Stack=true
+      IGNITE_QUIET: false
+      JAVA_OPTS: -Xmx500M -Djava.net.preferIPv4Stack=true -DmetricsLogFrequency=0
     volumes:
       - /home/swavek/dev/data/ignite/node1:/storage
       - /home/swavek/workspace/ignite_workshop/server_node/node-config1.xml:/config.xml
@@ -20,7 +21,10 @@ services:
     environment:
       IGNITE_WORK_DIR: /storage
       CONFIG_URI: /config.xml
-      JAVA_OPTS: -Xmx500M -Djava.net.preferIPv4Stack=true
+      IGNITE_QUIET: false
+      JAVA_OPTS: -Xmx500M -Djava.net.preferIPv4Stack=true -DmetricsLogFrequency=0
     volumes:
       - /home/swavek/dev/data/ignite/node2:/storage
-      - /home/swavek/workspace/ignite_workshop/server_node/node-config2.xml:/config.xml
+      - /home/swavek/workspace/ignite_workshop/server_node/node-config1.xml:/config.xml
+    ports:
+      - "10801:10800"

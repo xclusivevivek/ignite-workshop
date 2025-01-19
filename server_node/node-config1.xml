@@ -25,5 +25,25 @@
     <!--
         Alter configuration below as needed.
     -->
-    <bean id="grid.cfg" class="org.apache.ignite.configuration.IgniteConfiguration"/>
+    <beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://www.springframework.org/schema/beans         http://www.springframework.org/schema/beans/spring-beans.xsd         http://www.springframework.org/schema/util         http://www.springframework.org/schema/util/spring-util.xsd">
+        <bean class="org.apache.ignite.configuration.IgniteConfiguration" id="ignite.cfg">
+            <property name="dataStorageConfiguration">
+                <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
+                    <!--
+                    Default memory region that grows endlessly. Any cache will be bound to this memory region
+                    unless another region is set in the cache's configuration.
+                    -->
+                    <property name="defaultDataRegionConfiguration">
+                        <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
+                            <property name="name" value="Default_Region"/>
+                            <!-- 100 MB memory region with disabled eviction. -->
+                            <property name="initialSize" value="#{10 * 1024 * 1024}"/>
+                            <property name="persistenceEnabled" value="true"/>
+                        </bean>
+                    </property>
+                </bean>
+            </property>
+            <!-- other properties -->
+        </bean>
+    </beans>
 </beans>
